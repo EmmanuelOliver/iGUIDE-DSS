@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 
 import questions from "../data/questions";
-import questions from "../data/questions";
+
 const DecisionSupportDiagnostic = ({ onSubmit }) => {
   const [managingDifficulties, setManagingDifficulties] = useState(0);
   const [academicInconsistency, setAcademicInconsistency] = useState(0);
