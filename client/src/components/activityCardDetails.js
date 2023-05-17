@@ -1,15 +1,15 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from 'react-router-dom';
 import activities from "../data/activities";
 
 import Button from '@mui/material/Button'
 
 const ActivityDetailsPage = () => {
-  let navigate = useNavigate()
-  let param = useParams()
-  const selectedActivity = activities.find(
-    (a) => a.activity === param.activity
-  )
+  let navigate = useNavigate();
+  let location = useLocation();
+
+  const selectedActivity = location.state.activity;
+  
   const descriptionWithLineBreaks = selectedActivity.description.replace(
     /\n/g,
     "<br>"

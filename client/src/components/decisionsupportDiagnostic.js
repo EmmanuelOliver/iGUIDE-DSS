@@ -50,12 +50,15 @@ const [academicInconsistencyCount, setAcademicInconsistencyCount] = useState(0);
   const handleCbtItemChange = (type, name, situation, newValue) => {
     setCbtItems((prevItems) => {
       // Check if the item already exists
+
+      const newRating = Number(newValue);
+
       const existingItem = prevItems.find(
         (item) => item.name === name && item.type === type
       );
       if (existingItem) {
         // If it exists, increment the total rating and count
-        existingItem.totalRating += newValue;
+        existingItem.totalRating += newRating;
         existingItem.count += 1;
         // Calculate the average rating
         existingItem.rating = existingItem.totalRating / existingItem.count;
@@ -64,7 +67,7 @@ const [academicInconsistencyCount, setAcademicInconsistencyCount] = useState(0);
         // If it doesn't exist, create a new item
         return [
           ...prevItems,
-          { type, name, rating: newValue, totalRating: newValue, count: 1 },
+          { type, name, rating: newRating, totalRating: newRating, count: 1 },
         ];
       }
     });

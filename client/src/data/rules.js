@@ -3,7 +3,7 @@ import concepts from "../data/concepts.js";
 const rules = [
   {
     concept: concepts[0].concept_name,
-    attribute: "Difficulties",
+    attribute: "Self-Doubt",
     rating: 1,
     action:
       "Maintain your current study habits and continue to attend class regularly",

@@ -2,9 +2,10 @@ import concepts from "../data/concepts.js";
 
 const activities = [
   {
-    activity: "Difficulties",
+    activity: "Self-Doubt",
     description:
       "1. Identify the difficulty or challenge. \n2. Break it down into smaller, manageable tasks.\n3. Create a plan to tackle each task.\n4. Take action and work on each task one by one.\n5. Evaluate your progress and adjust your plan as needed.",
+    status: "active"
   },
   {
     activity: "Procrastination",

@@ -92,10 +92,86 @@ const updateCounselingSession = async (req, res) => {
     res.status(200).json(counselingsession)
 }
 
+const addResultsToSession = async (req, res) => {
+  const { id } = req.params
+  const { results } = req.body
+
+  const counselingsession = await Counseling.findByIdAndUpdate(id, { results }, { new: true })
+  if (!counselingsession) return res.status(404).json({error: 'No such session'})
+
+  res.status(200).json(counselingsession)
+}
+
+//add actions to a session
+const addActionToSession = async (req, res) => {
+  const { id } = req.params
+  const { actions } = req.body
+
+  const counselingsession = await Counseling.findByIdAndUpdate(id, { actions }, { new: true })
+  if (!counselingsession) return res.status(404).json({error: 'No such session'})
+
+  res.status(200).json(counselingsession)
+}
+
+//add activities to a session
+const addActivityToSession = async (req, res) => {
+  const { id } = req.params
+  const { activities } = req.body
+
+  const counselingsession = await Counseling.findByIdAndUpdate(id, { activities }, { new: true })
+  if (!counselingsession) return res.status(404).json({error: 'No such session'})
+
+  res.status(200).json(counselingsession)
+}
+
+//add notes to a session
+const addNoteToSession = async (req, res) => {
+  const { id } = req.params
+  const { notes } = req.body
+
+  const counselingsession = await Counseling.findByIdAndUpdate(id, { notes }, { new: true })
+  if (!counselingsession) return res.status(404).json({error: 'No such session'})
+
+  res.status(200).json(counselingsession)
+}
+
+const getSessionStatus = async (req, res) => {
+  const { id } = req.params
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such session'})
+  }
+
+  const counselingsession = await Counseling.findById(id, 'status')
+
+  if (!counselingsession) {
+    return res.status(404).json({error: 'No such session'})
+  }
+
+  res.status(200).json(counselingsession.status)
+}
+
+//update status of a session
+const updateSessionStatus = async (req, res) => {
+  const { id } = req.params
+  const { status } = req.body
+
+  const counselingsession = await Counseling.findByIdAndUpdate(id, { status }, { new: true })
+  if (!counselingsession) return res.status(404).json({error: 'No such session'})
+
+  res.status(200).json(counselingsession)
+}
+
 module.exports = {
-    getCounselingSessions,
-    getCounselingSession,
-    createCounselingSession,
-    deleteCounselingSession,
-    updateCounselingSession
+  getCounselingSessions,
+  getCounselingSession,
+  createCounselingSession,
+  deleteCounselingSession,
+  updateCounselingSession,
+  addResultsToSession,
+  addActionToSession,
+  addActivityToSession,
+  addNoteToSession,
+  getSessionStatus,
+  updateSessionStatus
 }

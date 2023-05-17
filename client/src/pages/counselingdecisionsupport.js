@@ -35,7 +35,7 @@ const DecisionSupport = () => {
         .then((data) => {
           setStudentName(data.firstName + " " + data.lastName);
           setMbti(data.mbti);
-          setIsDone(data.isDone);
+         
         })
         .catch((err) => {
           console.log(err);
@@ -44,6 +44,21 @@ const DecisionSupport = () => {
     }
   }, [studentNo]);
 
+  useEffect(() => {
+    if (param.id) {
+      fetch(`/api/counseling_session/${param.id}/status`)
+        .then((response) => response.json())
+        .then((status) => {
+          setIsDone(status === 'completed');  // replace 'done' with whatever value you use to represent a completed session
+        })
+        .catch((err) => {
+          console.log(err);
+          window.alert("error");
+        });
+    }
+  }, [param.id]);
+
+  
   const description = mbtiDescriptions.find(
     (desc) => desc.type === mbti
   )?.description;
@@ -102,7 +117,31 @@ const DecisionSupport = () => {
   };
 
   const saveResult = () => {
-    // Implement save functionality here, e.g., save to localStorage, database, etc.
+    // Prepare the request options
+    const requestOptions = {
+      method: 'PATCH',
+      headers: { 
+        'Content-Type': 'application/json',
+        // 'Authorization': 'Bearer ' + token  // Uncomment and provide the token if required
+      },
+      body: JSON.stringify({ results: result })
+    };
+
+    // Send the PATCH request to the server
+    fetch(`/api/counseling_session/${param.id}`, requestOptions)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Success:', data);
+        // You can update the state or do other things with the data here
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   };
 
   const navigate = useNavigate();
@@ -197,8 +236,9 @@ const DecisionSupport = () => {
           </div>
         </Modal>
       </div>
-      {isDone ? (
+      {isDone  ? (
         <div className="DecisionSupport">
+          
           <p>Problem Assesment is Completed.</p>
           {result && (
             <div className="goals">
