@@ -4,8 +4,24 @@ import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useauthenticateContext";
 import { useLocation } from "react-router-dom";
 import { useUserContext } from "../hooks/useuserContext";
+
+import React, { useState } from "react";
+import {
+  Button,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  IconButton,
+} from "@mui/material";
+
 import PersonIcon from "@mui/icons-material/Person";
-import Button from "@mui/material/Button";
+import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from "@mui/icons-material/Home";
+import PeopleIcon from "@mui/icons-material/People";
+import FileIcon from "@mui/icons-material/InsertDriveFile";
+import AssessmentIcon from "@mui/icons-material/Assessment";
 
 import logo from "../assets/images/logo.png";
 
@@ -13,8 +29,15 @@ const Navbar = () => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
   const location = useLocation();
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
+  const handleDrawerOpen = () => {
+    setDrawerOpen(true);
+  };
 
+  const handleDrawerClose = () => {
+    setDrawerOpen(false);
+  };
   const handleClick = () => {
     logout();
   };
@@ -31,65 +54,82 @@ const Navbar = () => {
   return (
     <header>
       <div className="container">
-        <Link to="/">
-          <div class="item1">
-            <img src={logo} alt="Logo" />
-          </div>
-          <div class="item2">
-            <h1>iGUIDE</h1>
-          </div>
-        </Link>
         <nav>
           {user && (
-            <div style={{ display: "flex", gap: "10" }}>
-            {user.username !== "1704864" && (
             <div>
-              <Button
-                variant={location.pathname === "/" ? "outlined" : "text"}
-                component={Link}
-                to="/"
+              <IconButton
+                edge="start"
                 color="inherit"
+                size="large"
+                sx={{ marginTop: "10px" }}
+                onClick={handleDrawerOpen}
               >
-                Home
-              </Button>
+                <MenuIcon />
+              </IconButton>
+              <Drawer
+                anchor="left"
+                open={drawerOpen}
               
-              <Button
-                variant={
-                  location.pathname === "/counselingsession" ||
-                  location.pathname === "/determine-goals"||
-                  location.pathname === "/decisionsupport/:id"
-                    ? "outlined"
-                    : "text"
-                }
-                component={Link}
-                to="/counselingsession"
-                color="inherit"
+                onClose={handleDrawerClose}
               >
-                Individual Counseling
-              </Button>
-              <Button
-                variant={
-                  location.pathname === "/students" ? "outlined" : "text"
-                }
-                component={Link}
-                to="/students"
-                color="inherit"
-              >
-                Student Profiles
-              </Button>
-              <Button
-                variant={location.pathname === "/assessment" ? "outlined" : "text"}
-                component={Link}
-                to="/assessment"
-                color="inherit"
-              >
-                Assessment
-              </Button>
-              </div>
-            )}
+                <List sx={{ mr: 3 }}>
+                  <ListItem button component={Link} to="/" sx={{ my: 2 }}>
+                    <ListItemIcon sx={{ mr: "-20px" }}>
+                      <HomeIcon />
+                    </ListItemIcon>
+                    <ListItemText primaryTypographyProps={{ sx: { fontFamily: "Poppins" } }} primary="Home" />
+
+                  </ListItem>
+
+                  <ListItem
+                    button
+                    component={Link}
+                    to="/counselingsession"
+                    sx={{ my: 2 }}
+                  >
+                    <ListItemIcon sx={{ mr: "-20px" }}>
+                      <PeopleIcon />
+                    </ListItemIcon>
+                    <ListItemText primaryTypographyProps={{ sx: { fontFamily: "Poppins" } }} primary="Indvidual Counseling" />
+                  </ListItem>
+
+                  <ListItem
+                    button
+                    component={Link}
+                    to="/students"
+                    sx={{ my: 2 }}
+                  >
+                    <ListItemIcon sx={{ mr: "-20px"}}>
+                      <FileIcon />
+                    </ListItemIcon>
+                    <ListItemText primaryTypographyProps={{ sx: { fontFamily: "Poppins" } }} primary="Student Profiles" />
+                  </ListItem>
+
+                  <ListItem
+                    button
+                    component={Link}
+                    to="/assessment"
+                    sx={{ my: 2 }}
+                  >
+                    <ListItemIcon sx={{ mr: "-20px" }}>
+                      <AssessmentIcon />
+                    </ListItemIcon>
+                    <ListItemText primaryTypographyProps={{ sx: { fontFamily: "Poppins" } }} primary="Assessment" />
+                  </ListItem>
+                </List>
+              </Drawer>
             </div>
           )}
+          <Link to="/">
+            <div class="item1">
+              <img src={logo} alt="Logo" />
+            </div>
+            <div class="item2">
+              <h1>iGUIDE</h1>
+            </div>
+          </Link>
         </nav>
+
         <nav>
           {user && (
             <div>

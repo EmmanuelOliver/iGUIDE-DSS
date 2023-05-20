@@ -59,8 +59,9 @@ img{
 
 nav {
   display: flex;
-  align-items: center;
+  align-items: left;
   color: #FFFFFF;
+  font-family: "Poppins";
 }
 nav a, nav button {
   margin-left: 10px;

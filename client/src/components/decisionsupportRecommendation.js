@@ -43,8 +43,7 @@ const DetermineRecommendation = (props) => {
         let data = inputData[j];
         if (evaluateCondition(ruleData, data)) {
           newActions.push(ruleData.action);
-          //  newActivities.push(ruleData.concept);
-          newActivities.push(ruleData.attribute);
+          newActivities.push(ruleData.recommendation);
         }
       }
     }
@@ -167,14 +166,14 @@ const DetermineRecommendation = (props) => {
     } catch (error) {
       console.error("An error occurred:", error);
     }
-    navigate("/endSession");
+    navigate("/ecounselingsession");
   };
 
   return (
     <div>
       <div className="goals">
         <Box sx={{ margin: 2 }}>
-          <h2>{inputData[0].rating}</h2>
+          <h2>Recommendations</h2>
           {selectedActions.map((action, index) => (
             <p>{action}</p>
           ))}
@@ -209,6 +208,9 @@ const DetermineRecommendation = (props) => {
           <Button
             variant={"outlined"}
             color="inherit"
+            sx={{
+              fontFamily: "Poppins",
+            }}
             onClick={handleSaveSession}
           >
             Save Counseling Session
@@ -217,6 +219,9 @@ const DetermineRecommendation = (props) => {
           <Button
             variant={"outlined"}
             color="inherit"
+            sx={{
+              fontFamily: "Poppins",
+            }}
             onClick={handlePostToStudent}
           >
             Post to Student
@@ -225,6 +230,9 @@ const DetermineRecommendation = (props) => {
           <Button
             variant={"outlined"}
             color="inherit"
+            sx={{
+              fontFamily: "Poppins",
+            }}
             onClick={handleEndCounselingSession}
           >
             End Counseling Session

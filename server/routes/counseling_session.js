@@ -6,6 +6,7 @@ const {
     deleteCounselingSession,
     updateCounselingSession,
     addResultsToSession,
+    checkForResult,
     addActionToSession,
     addActivityToSession,
     addNoteToSession,
@@ -30,7 +31,8 @@ router.delete('/:id', deleteCounselingSession)
 router.patch('/:id', updateCounselingSession)
 
 // New routes for updating the session with results, actions, activities, notes and status
-router.post('/:id/results', addResultsToSession)
+router.patch('/:id/results', addResultsToSession)
+router.get('/:id/results', checkForResult)
 router.post('/:id/actions', addActionToSession)
 router.post('/:id/activities', addActivityToSession)
 router.post('/:id/notes', addNoteToSession)

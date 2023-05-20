@@ -93,14 +93,33 @@ const updateCounselingSession = async (req, res) => {
 }
 
 const addResultsToSession = async (req, res) => {
-  const { id } = req.params
-  const { results } = req.body
+  const { id } = req.params;
+  const { results } = req.body;
 
-  const counselingsession = await Counseling.findByIdAndUpdate(id, { results }, { new: true })
-  if (!counselingsession) return res.status(404).json({error: 'No such session'})
+  console.log(`Received a PATCH request for id ${id} with results:`, results);
 
-  res.status(200).json(counselingsession)
+  // Perform input validation (this is a basic check, modify as needed)
+  if (!results || typeof results !== 'object') {
+    console.error('Invalid results data', results);
+    return res.status(400).json({ error: 'Invalid results data' });
+  }
+
+  try {
+    const counselingsession = await Counseling.findByIdAndUpdate(id, { results }, { new: true });
+    
+    if (!counselingsession) {
+      console.error('No such session with id', id);
+      return res.status(404).json({ error: 'No such session' });
+    }
+
+    console.log('Updated counseling session:', counselingsession);
+    return res.status(200).json(counselingsession);
+  } catch (err) {
+    console.error('Error updating session:', err);
+    return res.status(500).json({ error: 'Error updating session' });
+  }
 }
+
 
 //add actions to a session
 const addActionToSession = async (req, res) => {
@@ -112,6 +131,22 @@ const addActionToSession = async (req, res) => {
 
   res.status(200).json(counselingsession)
 }
+const checkForResult = async (req, res) => {
+  const { id } = req.params
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such session'})
+  }
+
+  const counselingsession = await Counseling.findById(id, 'results')
+
+  if (!counselingsession) {
+    return res.status(404).json({error: 'No such session'})
+  }
+
+  res.status(200).json(counselingsession.results || {}) // If there's no result, return an empty object
+}
+
 
 //add activities to a session
 const addActivityToSession = async (req, res) => {
@@ -169,6 +204,7 @@ module.exports = {
   deleteCounselingSession,
   updateCounselingSession,
   addResultsToSession,
+  checkForResult,
   addActionToSession,
   addActivityToSession,
   addNoteToSession,

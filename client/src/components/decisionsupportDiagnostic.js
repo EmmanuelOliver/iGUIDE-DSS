@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { createTheme } from '@mui/material/styles';
-import { ThemeProvider  } from '@mui/material/styles';
+import { createTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import {
   Box,
   Button,
@@ -17,28 +17,24 @@ import {
 import questions from "../data/questions";
 
 const DecisionSupportDiagnostic = ({ onSubmit }) => {
-  const [managingDifficulties, setManagingDifficulties] = useState(0);
-  const [academicInconsistency, setAcademicInconsistency] = useState(0);
-  const [balancingAcademicLife, setBalancingAcademicLife] = useState(0);
-  const [careerAndAcademicDecisions, setCareerAndAcademicDecisions] =
-    useState(0);
-
-    const [managingDifficultiesScore, setManagingDifficultiesScore] = useState(0);
-const [managingDifficultiesCount, setManagingDifficultiesCount] = useState(0);
-const [academicInconsistencyScore, setAcademicInconsistencyScore] = useState(0);
-const [academicInconsistencyCount, setAcademicInconsistencyCount] = useState(0);
   const [situation, setSituation] = useState("");
+  const [scores, setScores] = useState({
+    "Managing Difficulties": { score: 0, count: 0 },
+    "Academic Inconsistency": { score: 0, count: 0 },
+    "Balancing Academic Life": { score: 0, count: 0 },
+    "Career and Academic Decisions": { score: 0, count: 0 },
+  });
+
   const [cbtItems, setCbtItems] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const scoresToSubmit = {};
+    for (const [key, value] of Object.entries(scores)) {
+      scoresToSubmit[key] = value.score / value.count;
+    }
     onSubmit({
-      scores: {
-        ManagingDifficulties: managingDifficulties,
-        AcademicInconsistency: academicInconsistency,
-        BalancingAcademicLife: balancingAcademicLife,
-        CareerAndAcademicDecisions: careerAndAcademicDecisions,
-      },
+      scores: scoresToSubmit,
       cbtItems: cbtItems,
     });
   };
@@ -49,58 +45,38 @@ const [academicInconsistencyCount, setAcademicInconsistencyCount] = useState(0);
 
   const handleCbtItemChange = (type, name, situation, newValue) => {
     setCbtItems((prevItems) => {
-      // Check if the item already exists
-
       const newRating = Number(newValue);
-
       const existingItem = prevItems.find(
         (item) => item.name === name && item.type === type
       );
+
       if (existingItem) {
-        // If it exists, increment the total rating and count
         existingItem.totalRating += newRating;
         existingItem.count += 1;
-        // Calculate the average rating
         existingItem.rating = existingItem.totalRating / existingItem.count;
         return [...prevItems];
       } else {
-        // If it doesn't exist, create a new item
         return [
           ...prevItems,
           { type, name, rating: newRating, totalRating: newRating, count: 1 },
         ];
       }
     });
-
-    // Update the corresponding situation score with the new value
-    switch (situation) {
-      case "Managing Difficulties":
-        setManagingDifficultiesScore(prevScore => prevScore + newValue);
-        setManagingDifficultiesCount(prevCount => prevCount + 1);
-        setManagingDifficulties(managingDifficultiesScore / managingDifficultiesCount);
-        break;
-      case "Academic Inconsistency":
-        setAcademicInconsistencyScore(prevScore => prevScore + newValue);
-        setAcademicInconsistencyCount(prevCount => prevCount + 1);
-        setAcademicInconsistency(academicInconsistencyScore / academicInconsistencyCount);
-        break;
-      case "Balancing Academic Life":
-        setBalancingAcademicLife(prevScore => prevScore + newValue);
-        break;
-      case "Career and Academic Decisions":
-        setCareerAndAcademicDecisions(prevScore => prevScore + newValue);
-        break;
-      default:
-        console.error("Invalid situation type");
-    }
+    const newRating = Number(newValue);
+    setScores((prevScores) => {
+      const newScore = prevScores[situation].score + newRating;
+      const newCount = prevScores[situation].count + 1;
+      return {
+        ...prevScores,
+        [situation]: { score: newScore, count: newCount },
+      };
+    });
   };
 
   const formsTheme = createTheme({
     typography: {
-      body2: {
-        fontSize: "0.8rem", // Adjust the font size as needed
-        color: "textSecondary",
-      },
+      fontFamily: "Poppins",
+      fontSize: 12,
     },
   });
 
@@ -129,7 +105,9 @@ const [academicInconsistencyCount, setAcademicInconsistencyCount] = useState(0);
             <ThemeProvider theme={formsTheme}>
               <Box key={index} sx={{ m: 3, width: 550 }}>
                 <FormControl component="fieldset">
-                  <FormLabel component="legend">{question.text}</FormLabel>
+                  <FormLabel component="legend" sx={{ fontSize: 16 }}>
+                    {question.text}
+                  </FormLabel>
                   <RadioGroup
                     aria-label="difficulty"
                     defaultValue="1"
@@ -142,31 +120,41 @@ const [academicInconsistencyCount, setAcademicInconsistencyCount] = useState(0);
                       )
                     }
                   >
-                    <FormControlLabel
-                      value="1"
-                      control={<Radio />}
-                      label="1 - Rarely Observed"
-                    />
-                    <FormControlLabel
-                      value="2"
-                      control={<Radio />}
-                      label="2 - Occasionally Observed"
-                    />
-                    <FormControlLabel
-                      value="3"
-                      control={<Radio />}
-                      label="3 - Sometimes Observed"
-                    />
-                    <FormControlLabel
-                      value="4"
-                      control={<Radio />}
-                      label="4 - Often Observed"
-                    />
-                    <FormControlLabel
-                      value="5"
-                      control={<Radio />}
-                      label="5 - Always Observed"
-                    />
+                    <Box sx={{ mb: -2}}>
+                      <FormControlLabel
+                        value="1"
+                        control={<Radio />}
+                        label="1 - Rarely Observed"
+                      />
+                    </Box>
+                    <Box sx={{ mb: -2 }}>
+                      <FormControlLabel
+                        value="2"
+                        control={<Radio />}
+                        label="2 - Occasionally Observed"
+                      />
+                    </Box>
+                    <Box sx={{ mb: -2 }}>
+                      <FormControlLabel
+                        value="3"
+                        control={<Radio />}
+                        label="3 - Sometimes Observed"
+                      />
+                    </Box>
+                    <Box sx={{ mb: -2 }}>
+                      <FormControlLabel
+                        value="4"
+                        control={<Radio />}
+                        label="4 - Often Observed"
+                      />
+                    </Box>
+                    <Box sx={{ mb: -2 }}>
+                      <FormControlLabel
+                        value="5"
+                        control={<Radio />}
+                        label="5 - Always Observed"
+                      />
+                    </Box>
                   </RadioGroup>
                 </FormControl>
               </Box>

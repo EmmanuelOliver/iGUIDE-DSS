@@ -1,6 +1,7 @@
 function evaluateCondition(ruleData, data) {
   if (
-    ruleData.attribute === data.name  
+    ruleData.attribute === data.name  &&
+    ruleData.rating === data.rating  
   
   ) {
     return true

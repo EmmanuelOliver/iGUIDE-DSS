@@ -2,30 +2,86 @@ import concepts from "../data/concepts.js";
 
 const activities = [
   {
-    activity: "Self-Doubt",
+    activity: "Difficulties "+"Self Efficacy",
+    attribute: "Difficulties",
+    concept: "Self Efficacy",
     description:
       "1. Identify the difficulty or challenge. \n2. Break it down into smaller, manageable tasks.\n3. Create a plan to tackle each task.\n4. Take action and work on each task one by one.\n5. Evaluate your progress and adjust your plan as needed.",
     status: "active"
   },
   {
-    activity: "Procrastination",
+    activity: "Procrastination "+"Cognitive Therapy",
+    attribute: "Procrastination",
+    concept: "Cognitive Therapy",
     description:
-      "1. Identify why you're procrastinating (e.g. fear of failure, lack of motivation).\n2. Break down the task into smaller, more manageable parts.\n3. Set specific, realistic goals for each part.\n4. Use a timer to work on each part for a set amount of time.\n5. Take breaks in between work sessions.\n6. Reward yourself for making progress.\n7. Keep track of your progress and celebrate your successes.",
+      "1. Identify tasks that you are avoiding or delaying.\n2. Explore the thoughts or fears contributing to the procrastination.\n3. Challenge these thoughts and replace them with positive affirmations.\n4. Use time management strategies such as setting deadlines or using a planner.\n5. Reflect on your progress and adjust your strategies as needed.",
+    status: "active"
   },
   {
-    activity:concepts[0].concept_name, 
-    description:"1. Identify the source of academic difficulty: It is important to be specific about what the academic difficulty is. .\n2. Identify the skills needed to address the academic difficulty: Once the academic difficulty is identified, it is important to identify the skills that are needed to address it..\n3. Set specific, realistic goals for each part.\n4. Use a timer to work on each part for a set amount of time.\n5. Monitor progress: It is important to monitor progress towards achieving the goals that were set. This can help to maintain motivation and to make adjustments to the plan as needed. Keep track of progress by recording test scores, time spent studying, or other relevant measures..\n6. Reward yourself for making progress.\nEvaluate the plan: Periodically evaluate the plan to determine whether it is effective and whether adjustments need to be made. If progress is not being made or the plan is not effective, make changes to the plan as needed.",
-     
+    activity: "Social Withdrawal"+"Behavior Therapy",
+    attribute: "Social Withdrawal",
+    concept: "Behavior Therapy",
+    description:
+      "1. Identify social situations you tend to avoid.\n2. Gradually expose yourself to these situations, starting with less intimidating ones.\n3. Participate in group study sessions or extracurricular activities.\n4. Reflect on your experiences and feelings after each activity.\n5. Keep practicing social exposure and reward yourself for your efforts.",
+    status: "active"
+  },
+  //
+  {
+    activity: "Lack of Task Completion"+"Person-Centered Therapy",
+    attribute: "Lack of Task Completion",
+    concept: "Person-Centered Therapy",
+    description:
+      "1. Reflect on why some tasks are left incomplete.\n2. Identify personal interests and motivations.\n3. Set realistic goals aligned with your motivations.\n4. Create a plan to achieve your goals, including task completion steps.\n5. Continually assess your progress, and adapt your plan as necessary.",
+    status: "active"
   },
   {
-    activity:concepts[2].concept_name,
-    description:"1. Identify the overall goal: The first step in goal setting is to identify what you want to achieve. Be specific and realistic about what you want to accomplish.\n2. Break down the goal into smaller, achievable steps: Once you have identified the overall goal, break it down into smaller, achievable steps. This will make it easier to stay focused and motivated as you work towards the goal.\n3. Assign a deadline to each step: Set specific deadlines for each step to help you stay on track and hold yourself accountable.\n4. Use a timer to work on each step for a set amount of time: Use a timer to help you stay focused and productive as you work on each step.\n5. Monitor progress: Keep track of your progress towards achieving each step. This will help you to stay motivated and make adjustments to the plan as needed.\n6. Reward yourself for making progress: Celebrate your accomplishments and reward yourself for making progress towards your goal.\n7. Evaluate the plan: Periodically evaluate your plan to determine whether it is effective and whether adjustments need to be made. If progress is not being made or the plan is not effective, make changes to the plan as needed.",
-    },
+    activity: "Inconsistent Attendance"+"Solution-Focused Brief Therapy",
+    attribute: "Inconsistent Attendance",
+    concept: "Solution-Focused Brief Therapy",
+    description:
+      "1. Acknowledge the problem with attendance.\n2. Visualize what consistent attendance would look like.\n3. Identify small steps that can be taken towards improved attendance.\n4. Commit to these steps and implement them.\n5. Continuously review your progress and celebrate successes.",
+    status: "active"
+  },
+  //
   {
-  activity: "Academic Inconsistency",
-description:
-"1. Acknowledge your feelings: It's important to recognize and accept how you feel. Allow yourself to feel sadness and disappointment.\n2. Identify the reasons: Try to identify the reasons behind your academic inconsistency and sadness. Are there any external or internal factors that are affecting your academic performance and mood? \n3. Seek support: Talk to someone you trust, such as a friend, family member, or a counselor. Don't hesitate to reach out for help.\n4. Create a routine: Establish a daily routine that includes time for studying, exercising, and self-care activities. This can help you feel more in control and motivated.\n5. Set achievable goals: Break down your academic tasks into smaller, more manageable goals. Set specific, realistic goals for each task, and celebrate your achievements along the way.\n6. Practice self-compassion: Be kind and compassionate to yourself. Don't compare yourself to others, and don't be too hard on yourself for mistakes or setbacks.\n7. Stay positive: Focus on your strengths and positive aspects of your life. Surround yourself with positive and supportive people.",
+    activity: "Feeling Overwhelmed"+"Cognitive-Behavioral Therapy",
+    attribute: "Feeling Overwhelmed",
+    concept: "Cognitive-Behavioral Therapy",
+    description:
+      "1. Identify tasks or responsibilities that are causing overwhelm.\n2. Break large tasks into smaller, more manageable pieces.\n3. Use stress management techniques, such as deep breathing or mindfulness.\n4. Regularly review and adjust your workload.\n5. Seek support when needed and celebrate your successes.",
+    status: "active"
+  },
+  {
+    activity: "Lack of Personal Time"+"Psychoanalysis",
+    attribute: "Lack of Personal Time",
+    concept: "Psychoanalysis",
+    description:
+      "1. Reflect on reasons why personal time might be neglected.\n2. Identify activities you enjoy and find relaxing.\n3. Schedule regular time for these activities, treating them as non-negotiable appointments.\n4. Explore underlying issues or beliefs that may be causing the neglect of personal time.\n5. Continually reassess your progress and the balance between work and personal time.",
+    status: "active"
+  },
+//  
+{
+  activity: "Uncertainty about Future"+"Existential Therapy",
+  attribute: "Uncertainty about Future",
+  concept: "Existential Therapy",
+  description:
+    "1. Reflect on your fears about the future.\n2. Recognize that uncertainty is a part of life and it's okay not to have all the answers.\n3. Explore personal values and how they align with future goals.\n4. Create a plan that respects these values and goals, accepting that adjustments may be necessary.\n5. Revisit and revise this plan as you continue to grow and learn.",
+  status: "active"
 },
+{
+  activity: "Frequent Major Switching"+"Gestalt Therapy",
+  attribute: "Frequent Major Switching",
+  concept: "Gestalt Therapy",
+  description:
+    "1. Reflect on your academic decisions and patterns.\n2. Consider the reasons for frequently changing majors.\n3. Focus on the present moment and your current interests and goals.\n4. Make a decision based on these current factors, rather than future fears or past mistakes.\n5. Regularly review your academic path, making adjustments as necessary.",
+  status: "active"
+}
+
 ];
+
+activities.forEach(activity => {
+  activity.title =  `${activity.attribute} with ${activity.concept} Concept`;
+});
+
 
 export default activities;

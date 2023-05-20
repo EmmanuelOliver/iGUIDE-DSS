@@ -1,12 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import React, { useState } from 'react';
-import Switch from '@mui/material/Switch'; import { styled } from "@mui/system";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
-import Checkbox from '@mui/material/Checkbox';
-import Typography from "@mui/material/Typography";
+import React, { useState } from "react";
+import Switch from "@mui/material/Switch";
+import { styled } from "@mui/system";
+import { Box, Button, Card, CardContent, CardActions, Checkbox, Typography } from '@mui/material';
+
 import activities from "../data/activities";
 
 const GreenSwitch = styled(Switch)(({ theme }) => ({
@@ -21,43 +18,81 @@ const GreenSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-const ActivityPage = ({ activity, index, onStatusChange, onSelectionChange }) => {
-
+const ActivityPage = ({
+  activity,
+  index,
+  onStatusChange,
+  onSelectionChange,
+}) => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate(`/activities/${activity.activity}`, { state: { activity } })
-  }
+    navigate(`/activities/${activity.activity}`, { state: { activity } });
+  };
 
   return (
     <Card sx={{ width: 250, m: 1 }}>
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          p: 1,
+          pb: 0, // remove padding-bottom to reduce space between this box and the content below
+        }}
+      >
+        <Typography sx={{ fontSize: 14, margin: '10px' }} color="text.secondary" gutterBottom>
           Activity
         </Typography>
+        <Box
+          sx={{
+  
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <GreenSwitch
+           sx={{
+            marginBottom: '20px',
+            marginRight:  '-10px'
+          }}
+            checked={activity.status === "completed"}
+            onChange={(event) =>
+              onStatusChange(event.target.checked ? "completed" : "active")
+            }
+            inputProps={{ "aria-label": "controlled" }}
+          />
+          <Checkbox
+            checked={activity.selected}
+            onChange={(event) => onSelectionChange(event.target.checked)}
+            inputProps={{ "aria-label": "controlled" }}
+          />
+        </Box>
+      </Box>
+      <CardContent sx={{
+            margin: '10px',
+  
+          }}>
         <Typography variant="h5" component="div">
-        {activity.activity}
+          {activity.title}
         </Typography>
         <Typography color="text.secondary">
           Status: {activity.status}
         </Typography>
-        <GreenSwitch
-           checked={activity.status === "completed"}
-           onChange={(event) => onStatusChange(event.target.checked ? "completed" : "active")}
-           inputProps={{ 'aria-label': 'controlled' }}
-        />
       </CardContent>
       <CardActions>
-        <Button size="small" sx={{ color: "rgb(204, 0, 0)" }}onClick={handleClick}>
-          ViewDetails
+        <Button
+          size="small"
+          sx={{ color: "rgb(204, 0, 0)" ,
+            margin: '10px'
+  
+          }}
+          onClick={handleClick}
+        >
+          View Details
         </Button>
-        <Checkbox
-    checked={activity.selected}
-    onChange={(event) => onSelectionChange(event.target.checked)}
-    inputProps={{ 'aria-label': 'controlled' }}
-  />
       </CardActions>
     </Card>
-  )
-}
+  );
+};
 
 export default ActivityPage;

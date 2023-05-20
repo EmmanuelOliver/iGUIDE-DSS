@@ -57,21 +57,16 @@ const CounselingSessionDetails = ({ counselingsession }) => {
         <h4>{counselingsession.title}</h4>
         <p>
           <strong>Student Number: </strong>
-          {counselingsession.studentNo}
+          {counselingsession.studentNo}{" "}
+        </p>
+        <p>
+          <strong>Status: </strong>
+          ongoing
         </p>
         <p>
           {formatDistanceToNow(new Date(counselingsession.createdAt), {
             addSuffix: true,
           })}
-        </p>
-
-        <p>
-          <strong>Status: </strong>
-          <span
-            className={`session-status`}
-          >
-            ongoing
-          </span>
         </p>
 
         <Link

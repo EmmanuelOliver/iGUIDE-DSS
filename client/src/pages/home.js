@@ -16,7 +16,9 @@ function Home() {
       </Box>
       <Box sx={{}}>
       {user.username !== '1704864' && (
-      <Button  variant={'outlined'} component={Link} to="/counselingsession" color="inherit">
+      <Button sx={{
+        fontFamily: "Poppins",
+      }} variant={'outlined'} component={Link} to="/counselingsession" color="inherit">
           Start Individual Counseling
       </Button>)}
       </Box>

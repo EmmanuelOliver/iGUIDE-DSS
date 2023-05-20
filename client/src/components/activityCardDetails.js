@@ -21,7 +21,7 @@ const ActivityDetailsPage = () => {
 
   return (
     <div>
-      <h2>{selectedActivity.activity}</h2>
+      <h2>{selectedActivity.title}</h2>
       <p dangerouslySetInnerHTML={{ __html: descriptionWithLineBreaks }}></p>
       <Button  variant={'outlined'} color="inherit" onClick={handleBackClick}>Go Back</Button>
     </div>

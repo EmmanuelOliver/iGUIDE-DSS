@@ -19,13 +19,13 @@ const counselingSchema = new Schema({
     situations: {
       type: Map,
       of: {
-        average: String,
+        average: Number,
         priority: {
           type: String,
           enum: ['High Priority', 'Medium Priority', 'Low Priority'],
         },
       },
-      required: true,
+     
     },
     cbtItems: [
       {
